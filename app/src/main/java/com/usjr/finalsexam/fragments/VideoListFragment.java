@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.usjr.finalsexam.R;
@@ -56,7 +59,10 @@ public class VideoListFragment extends Fragment implements AdapterView.OnItemCli
         View view = inflater.inflate(R.layout.fragment_video_list, container, false);
         ListView listView = (ListView) view.findViewById(R.id.listView);
 
+
+        mVideosDb.addChildEventListener(childEventListener);
         mAdapter = new VideoListAdapter(getContext(), new ArrayList<Video>());
+
         listView.setAdapter(mAdapter);
 
         return view;
@@ -68,4 +74,32 @@ public class VideoListFragment extends Fragment implements AdapterView.OnItemCli
             return;
         }
     }
-}
+
+    ChildEventListener childEventListener = new ChildEventListener() {
+        @Override
+        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+        }
+
+        @Override
+        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+
+};
+    }
